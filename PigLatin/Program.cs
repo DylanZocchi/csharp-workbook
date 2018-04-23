@@ -10,6 +10,9 @@ namespace PigLatin
             Console.WriteLine("enter a word");
             string input = Console.ReadLine();
             Console.WriteLine(TranslateWord(input.ToLower()));
+            Console.WriteLine("enter a sentance");
+            string input2 = Console.ReadLine();
+            Console.WriteLine(Sentence(input2));
 
 
 
@@ -25,6 +28,21 @@ namespace PigLatin
             string restWord = word.Substring(vowelIndex);
             return restWord + firstPart + "ay";
         }
+
+        
+        static string Sentence(string word)
+        {   
+            
+		    string[] words = word.Split(' ');
+		    string[] upperCaseWords = new string[5];
+		    for (int i = 0; i < words.Length; i++)
+		    {
+			upperCaseWords[i] = TranslateWord(words[i]).ToUpper();
+		    }
+		    string upperCaseString = String.Join(" ", upperCaseWords);
+		    return upperCaseString;
+        }
+	
         
     }
 
