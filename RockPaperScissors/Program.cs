@@ -28,41 +28,11 @@ namespace RockPaperScissors
         
 
             
-            //Console.WriteLine(CompareHands(hand1, hand2));
             
-            // Console.WriteLine("Hand One Score = {0}", h1s);
-            // Console.WriteLine("Hand Two Score = {0}", h2s);
-            // Thread.Sleep(2000);
-            // Console.WriteLine("Would you like to play again? [y/n]");
-            
-
-            //LOOP GAME
-            // String end = Console.ReadLine();
-
-            //         while ( end == "y")
-		    //         {
-		    //             Main();
-            //             end = Console.ReadLine();
-
-            //             if(end == "n")
-                        
-            //             {
-            //                 // break;
-                            
-            //             }
-            //         }
-
-
-            //leave this command at the end so your program does not close automatically
-            //Console.ReadLine();
-        //}
-
-        //public static string CompareHands(string hand1, string hand2)
-        //{
 
             if (hand1 == hand2)
             {
-            Console.WriteLine("It's a tie");
+                Console.WriteLine("It's a tie");
             }
 
                         
@@ -86,13 +56,13 @@ namespace RockPaperScissors
             {
                 if (hand1 == "scissors")
                 {
-                Console.WriteLine("Hand two wins!"); 
-                h2s++;
+                    Console.WriteLine("Hand two wins!"); 
+                    h2s++;
                 }
                 if (hand1 == "paper")
                 {
-                Console.WriteLine("Hand one wins!");  
-                h1s++;
+                    Console.WriteLine("Hand one wins!");  
+                    h1s++;
                                  
                 }
             }
@@ -100,8 +70,8 @@ namespace RockPaperScissors
             {
                 if (hand2 == "scissors")
                 {
-                Console.WriteLine("Hand two wins!"); 
-                h2s++;                  
+                    Console.WriteLine("Hand two wins!"); 
+                    h2s++;                  
                 }
                 if (hand2 == "rock")
                 {
@@ -114,8 +84,8 @@ namespace RockPaperScissors
             {
                 if (hand1 == "scissors")
                 {
-                Console.WriteLine("Hand one wins!"); 
-                h1s++;              
+                    Console.WriteLine("Hand one wins!"); 
+                    h1s++;              
                 }
                 if (hand2 == "rock")
                 {
@@ -124,9 +94,6 @@ namespace RockPaperScissors
                     
                 }
             }
-        
-            
-            //return hand1 + ' ' + hand2;
         
             Console.WriteLine("Hand One Score = {0}", h1s);
             Console.WriteLine("Hand Two Score = {0}", h2s);
@@ -137,19 +104,18 @@ namespace RockPaperScissors
 
             String end = Console.ReadLine();
 
-                    while ( end == "y")
-		            {
-		                Main();
-                        end = Console.ReadLine();
+                while ( end == "y")
+		        {
+		            Main();
+                    end = Console.ReadLine();
 
-                        if(end == "n")
-                        
-                        {
-                            return;
+                    if(end == "n")    
+                    {
+                        return;
                             
-                        }
                     }
-             Console.ReadLine();
+                }
+            Console.ReadLine();
         }       
     }
 }
