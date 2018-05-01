@@ -103,20 +103,20 @@ namespace TicTacToe
             return true;
             }
             
-                  //CheckForWin();
+                //CheckForWin();
                 
                 //CheckForWin();
                 //playerTurn = "O";  
                 //return;
              
-            //else if (playerTurn == "O")
-            //{   //CheckForWin();
+                //else if (playerTurn == "O")
+          //{   //CheckForWin();
                  
                 //CheckForWin();
                 //playerTurn = "X";  
                 //return;
 
-            //}                
+          //}                
             
 
             
