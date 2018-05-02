@@ -20,19 +20,14 @@ namespace TicTacToe
         };
 
         public static void Main()
-        {    
-            
-
+        {                
             do
             {   
                 
                 DrawBoard();
                 GetInput();
-                //PlaceMark(row,column);
-            } while (!CheckForWin() && !CheckForTie());
-            //turn += 1;
 
-            
+            } while (!CheckForWin() && !CheckForTie());
         }
 
         public static void GetInput()
@@ -44,51 +39,15 @@ namespace TicTacToe
             Console.WriteLine("Enter Column:");
             int column = int.Parse(Console.ReadLine());
             PlaceMark(row,column);
-            //CheckForWin();
-            //CheckForTie();
             turn += 1;
-            //Thread.Sleep(2000);
-
-            
-
-            
-            
-            
-
-            
-            
-
-
-            
-            
+            Thread.Sleep(2000);
         }
 
         public static void PlaceMark(int row, int column)
         {
             board[row][column] = playerTurn;
 
-            // if (playerTurn == "X")
-            // {   //CheckForWin();
-            //     board[row][column] = playerTurn;
-            //     //CheckForWin();
-            //     playerTurn = "O";  
-            //     //return;
-                
-            // }  
-            // else if (playerTurn == "O")
-            // {   //CheckForWin();
-            //     board[row][column] = playerTurn; 
-            //     //CheckForWin();
-            //     playerTurn = "X";  
-            //     //return;
-
-            // }                
         }    
-
-           
-        
-       
-        
 
         public static bool CheckForWin()
         {
@@ -102,26 +61,6 @@ namespace TicTacToe
             {
             return true;
             }
-            
-                //CheckForWin();
-                
-                //CheckForWin();
-                //playerTurn = "O";  
-                //return;
-             
-                //else if (playerTurn == "O")
-          //{   //CheckForWin();
-                 
-                //CheckForWin();
-                //playerTurn = "X";  
-                //return;
-
-          //}                
-            
-
-            
-            
-            
         }
 
         public static bool CheckForTie()
@@ -142,7 +81,7 @@ namespace TicTacToe
             
             if (board[0][0] == playerTurn && board[0][1] == playerTurn && board[0][2] == playerTurn || board[1][0] == playerTurn && board[1][1] == playerTurn && board[1][2] == playerTurn || board[2][0] == playerTurn && board[2][1] == playerTurn && board[2][2] == playerTurn )
             {
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 Console.WriteLine(playerTurn + " " + "WINS");
                 return true;
             }
@@ -154,7 +93,7 @@ namespace TicTacToe
         {
             if (board[0][0] == playerTurn && board[1][0] == playerTurn && board[2][0] == playerTurn || board[0][1] == playerTurn && board[1][1] == playerTurn && board[2][1] == playerTurn || board[0][2] == playerTurn && board[1][2] == playerTurn && board[2][2] == playerTurn )
             {
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 Console.WriteLine(playerTurn + " " + "WINS");
                 return true;
                 
@@ -167,7 +106,7 @@ namespace TicTacToe
         {
             if (board[0][0] == playerTurn && board[1][1] == playerTurn && board[2][2] == playerTurn || board[0][2] == playerTurn && board[1][1] == playerTurn && board[2][0] == playerTurn )
             {
-                //Thread.Sleep(1000);
+                Thread.Sleep(1000);
                 Console.WriteLine(playerTurn + " " + "WINS");
                 return true;
             }
