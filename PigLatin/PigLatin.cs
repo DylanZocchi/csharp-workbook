@@ -43,7 +43,7 @@ namespace PigLatin
             
 		    for (int i = 0; i < words.Length; i++)
 		    {
-			upperCaseWords[i] = TranslateWord(words[i]).ToUpper();
+			    upperCaseWords[i] = TranslateWord(words[i]).ToUpper();
 		    }
 		    string upperCaseString = String.Join(" ", upperCaseWords);
 		    return upperCaseString;
