@@ -32,15 +32,16 @@ namespace Checkpoint1
                         
             int sum = 0;  
             bool exit = true;         
-            Console.WriteLine("Enter a number or ok to exit");
             while(exit)
             {
-            string i = Console.ReadLine().ToLower();
+                Console.WriteLine("Enter a number or \"ok\" to exit");
+                string i = Console.ReadLine().ToLower();
                     if ( i == "ok")
                     {
                         exit = false;
                         break;
                     }
+                    
                 sum += Convert.ToInt32(i);
                 Console.WriteLine("Sum = " + sum);  
             }                      
