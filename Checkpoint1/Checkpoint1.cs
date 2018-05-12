@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using System.Linq;
 
 namespace Checkpoint1
@@ -41,19 +42,24 @@ namespace Checkpoint1
                         exit = false;
                         break;
                     }
-                    
-                sum += Convert.ToInt32(i);
-                Console.WriteLine("Sum = " + sum);  
+                    try
+                    {
+                    sum += Convert.ToInt32(i);
+                    Console.WriteLine("Sum = " + sum);
+                    }
+                    catch
+                    {
+                    Console.WriteLine("");
+                    }                   
             }                      
-
         }
 
         public static void three()
         {
 
-        //      Write a program and ask the user to enter a number. Compute the factorial
-        //      of the number and print it on the console. For example, if the user enters 5,
-        //      the program should calculate 5 x 4 x 3 x 2 x 1 and display it as 5! = 120.
+        // Write a program and ask the user to enter a number. Compute the factorial
+        // of the number and print it on the console. For example, if the user enters 5,
+        // the program should calculate 5 x 4 x 3 x 2 x 1 and display it as 5! = 120.
         
        
             int i; 
@@ -74,17 +80,19 @@ namespace Checkpoint1
 
         public static void four()
         {
-        //     Write a program that picks a random number between 1 and 10. Give the user 4
-        //     chances to guess the number. If the user guesses the number, display 
-        //     “You won"; otherwise, display “You lost".
-        //     (To make sure the program is behaving correctly,
-        //     you can display the secret number on the console first.)
+        //Write a program that picks a random number between 1 and 10. Give the user 4
+        //chances to guess the number. If the user guesses the number, display 
+        //“You won"; otherwise, display “You lost".
+        //(To make sure the program is behaving correctly,
+        //you can display the secret number on the console first.)
          
             
             int turn = 1;
             Random rnd = new Random();
             int x = rnd.Next(1, 10);
-            Console.WriteLine(x);
+            Console.WriteLine("SECRET NUMBER IS " + x);
+            Thread.Sleep(1000);
+            Console.WriteLine("");
             game();
 
             void game()
@@ -92,20 +100,32 @@ namespace Checkpoint1
                 Console.WriteLine("Enter a number between 1 and 10:");
                 int z = Convert.ToInt16(Console.ReadLine());
 
+                if(x == z)
+                {
+                    Thread.Sleep(1000);
+                    Console.WriteLine("///////");
+                    Console.WriteLine("YOU WON"); 
+                    Console.WriteLine("///////"); 
+                    Console.WriteLine("");                  
+                }
+
                 if(turn == 4)
                 {
-                    Console.WriteLine("Game Over");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("/////////");
+                    Console.WriteLine("GAME OVER");
+                    Console.WriteLine("/////////");
+                    Console.WriteLine("");
                     return;                
                 }
 
-                if(x == z)
-                {
-                    
-                    Console.WriteLine("You Won");                    
-                }
                 else
                 {
-                    Console.WriteLine("You Lost");
+                    Thread.Sleep(1000);
+                    Console.WriteLine("/////////");
+                    Console.WriteLine("TRY AGAIN");
+                    Console.WriteLine("/////////");
+                    Console.WriteLine("");
                     turn++;
                     game();
                 }                         
@@ -118,12 +138,18 @@ namespace Checkpoint1
             // separated by comma. Find the maximum of the numbers and display
             // it on the console. For example, if the user enters “5, 3, 8, 1, 4",
             // the program should display 8.
+            
+            int [] numbers = new int [10];
+            Console.WriteLine("Enter a series of numbers separated by commas:");
+            string [] x = Console.ReadLine().Split(',');
+            for (int i = 0; i < x.Length; i ++)
+            {
+                numbers[i] = Convert.ToInt32(x[i]);
 
-            Console.WriteLine("Enter a series of numbers separated by comma:");
-            string x = Console.ReadLine();
-            string[] y= x.Split(' ');
-            Console.WriteLine(y.Max());
+            }
+            Console.WriteLine("MAX VAL = " + numbers.Max());
 
-        }
+         }
     }
 }
+
