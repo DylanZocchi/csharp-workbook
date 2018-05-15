@@ -10,7 +10,7 @@ namespace OOP
             Person rebel = new Person("Leia", "Organa", "Rebel");
             Person imperial = new Person("Darth", "Vader","Imperial"); 
             Ship falcon = new Ship("Rebel", "Smuggling", 2);
-		    Ship tie = new Ship("Tie", "Fighter", 1);
+            Ship tie = new Ship("Tie", "Fighter", 1);
             Station imperialStation = new Station("Imperial", "Death Star", 100);
             Station rebelStation = new Station("Rebel", "Rebel Base", 50);
             Console.WriteLine("");
