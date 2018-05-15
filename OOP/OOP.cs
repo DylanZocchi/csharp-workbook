@@ -20,14 +20,14 @@ namespace OOP
     {
         private string firstName;
         private string lastName;
-        //private string password;
+       
         private string alliance;
         public Person(string firstName, string lastName, string alliance)
         {
             this.firstName = firstName; //use this when your names are the same
             this.lastName = lastName;
             this.alliance = alliance;
-            //this.password = PigLatinHash("hello123"); //ello123hay  PASSWORD EXAMPLE 
+            
         }
         public string FullName
         {
@@ -42,13 +42,7 @@ namespace OOP
                 this.lastName = names[1];
             }
         }
-        // public string Password EXAMPLE HOW PASSWORDS ARE USED
-        // {
-        //     set
-        //     {
-        //     this.password = PigLatinHash(value);
-        //     }
-        // }
+
     }
 
     class Ship

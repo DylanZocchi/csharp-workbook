@@ -7,45 +7,62 @@ namespace OOP2
         static void Main() //method
         {
             Garage smallGarage = new Garage(2);
-            Car blueCar = new Car ("blue");
-            Car redCar = new Car ("red");
+            Car blueCar = new Car("blue", 4);
+            Car redCar = new Car("red", 4);
             smallGarage.ParkCar(redCar,1);
             smallGarage.ParkCar(blueCar,0);
             Person oldPerson = new Person("old");
             Person youngPerson = new Person("young");
-            //blueCar.Person(oldPerson);
+            blueCar.SeatPerson(oldPerson, 2);
+            redCar.SeatPerson(youngPerson, 1);
 
+            
+            
             Console.WriteLine(smallGarage.Cars);
+
         }
     }
 
-    class Car //object  General idea of what produces a car
+    public class Car //object  General idea of what produces a car
     {
-        //private Person[] persons;
-        public int seats;
+        private Person[] passengers;
+        public int Seats {get; private set;}
+
+        public string Color {get; private set;} 
+
         public Car (string initalColor, int seats)
         {
             Color = initalColor;
-            this.seats = seats;
-            this.= new Car[size];
-
-            
+            this.passengers = new Person[seats];
+                    
         }
-       public string Color {get; private set;} //properties because its not private
 
+        public string Passengers
+        {
+            get
+            {
+                foreach (var person in passengers)
+                {
+                    Console.WriteLine(String.Format("{0}", person.Age));
+                }
+                return "that everyone";
+            }
+        }
+       //public string Color {get; private set;} //properties because its not private
+
+       public void SeatPerson(Person person, int seat)
+        {
+            this.passengers[seat] = person;
+        }
        
+        public void RemovePerson(int seat)
+        {
+            
+            this.passengers[seat] = null;
+        }
+
+        
     }
-    // class Remove //object  General idea of what produces a car
-    // {
-
-    //    public Remove (string remove)
-    //    {   
-    //       remove = "remove";
-    //    }
-    //    public string remove {get; private set;} //properties because its not private
-    // }
-
-
     class Garage 
     {
         private Car[] cars;  
@@ -59,13 +76,13 @@ namespace OOP2
         public int Size {get; private set;}
         public void ParkCar(Car car, int spot)
         {
-            cars[spot] = car;
+            this.cars[spot] = car;
         }
        
         public void RemoveCar(int spot)
         {
             
-            cars[spot] = null;
+            this.cars[spot] = null;
             
         }
         public string Cars 
@@ -73,14 +90,15 @@ namespace OOP2
             get 
             {
                 //return $"Car in spot 0 is {cars[0].Color} and the car in spot 1 is {cars[1].Color}";
-            for (int i = 0; i < cars.Length; i++)
-            {
-                if (cars !=null) 
+                for (int i = 0; i < cars.Length; i++)
                 {
-                    Console.WriteLine(String.Format("The {0} car is in spot {1}.", cars[i].Color, i));
-                }   
-            }
-            return "That's all";
+                    if (cars !=null) 
+                    {
+                        Console.WriteLine(String.Format("The {0} car is in spot {1}.", cars[i].Color, i));
+                    }   
+                }
+
+                return "That's all";
 
             }
         }
