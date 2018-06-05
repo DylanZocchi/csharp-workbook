@@ -10,7 +10,7 @@ namespace Checkpoint1
         {
             //one();
             //two();
-            //three();
+            three();
             //four();
             //five();
 
@@ -64,7 +64,7 @@ namespace Checkpoint1
        
             int i; 
             int number; 
-            double fact;
+            long fact;
             Console.WriteLine("Enter the Number");
             number = int.Parse(Console.ReadLine());
             fact = number;

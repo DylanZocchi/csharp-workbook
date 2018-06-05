@@ -8,7 +8,11 @@ namespace Checkers
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Board board = new Board();
+            board.GenerateCheckers();
+            board.DrawBoard();
+            
+            new Game();            
         }
     }
 
@@ -20,7 +24,17 @@ namespace Checkers
         
         public Checker(string color, int[] position)
         {
-            // Your code here
+            int circleId;
+            if (color == "white")
+            {
+                circleId = int.Parse("25CB", System.Globalization.NumberStyles.HexNumber);
+            }
+            else
+            {
+                circleId = int.Parse("25CF", System.Globalization.NumberStyles.HexNumber);
+            }
+            this.Symbol = char.ConvertFromUtf32(circleId);
+            this.Position = position;
         }
     }
 
@@ -31,42 +45,169 @@ namespace Checkers
         
         public Board()
         {
-            // Your code here
+            this.Checkers = new List<Checker>();
+            this.CreateBoard();
+
+            
             return;
         }
         
         public void CreateBoard()
         {
-            // Your code here
+            this.Grid = new string[][] {
+                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
+                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
+                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
+                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
+                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
+                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
+                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
+                new string[] {" ", " ", " ", " ", " ", " ", " ", " "},
+            };
+            
             return;
         }
         
         public void GenerateCheckers()
         {
-            // Your code here
+            
+
+            int[][] whitePositions = new int[][] {
+                new int[] { 0, 1 }, new int[] { 0, 3 }, new int[] { 0, 5 }, new int[] { 0, 7 },
+                new int[] { 1, 0 }, new int[] { 1, 2 }, new int[] { 1, 4 }, new int[] { 1, 6 },
+                new int[] { 2, 1 }, new int[] { 2, 3 }, new int[] { 2, 5 }, new int[] { 2, 7 }
+            };
+            
+
+            int[][] blackPositions = new int[][] {
+                new int[] { 5, 0 }, new int[] { 5, 2 }, new int[] { 5, 4 }, new int[] { 5, 6 },
+                new int[] { 6, 1 }, new int[] { 6, 3 }, new int[] { 6, 5 }, new int[] { 6, 7 },
+                new int[] { 7, 0 }, new int[] { 7, 2 }, new int[] { 7, 4 }, new int[] { 7, 6 }
+            };
+
+            
+            for (int i = 0; i < 12; i++)
+            {
+                Checker white = new Checker("white", whitePositions[i]);
+                Checker black = new Checker("black", blackPositions[i]);
+                this.Checkers.Add(white);
+                this.Checkers.Add(black);
+            }
+
             return;
         }
         
         public void PlaceCheckers()
         {
-            // Your code here
+            foreach (var checker in Checkers)
+            {
+                this.Grid[checker.Position[0]][checker.Position[1]] = checker.Symbol;
+            }
             return;
         }
         
         public void DrawBoard()
         {
-            // Your code here
+            CreateBoard();
+            PlaceCheckers();
+            Console.WriteLine("  0 1 2 3 4 5 6 7");
+            for (int i = 0; i < 8; i++)
+            {
+                Console.WriteLine(i + " " + String.Join(" ", this.Grid[i]));
+            }
             return;
         }
         
-        public Checker SelectChecker(int row, int column)
+        public Checker SelectChecker()
         {
-            return Checkers.Find(x => x.Position.SequenceEqual(new List<int> { row, column }));
+            Console.WriteLine("Select checker row");
+            int row = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Select checker column");
+            int col = Convert.ToInt32(Console.ReadLine());
+                
+
+                
+            return Checkers.Find(x => x.Position.SequenceEqual(new List<int> { row, col }));
+        }
+
+        public bool MoveChecker(Checker checker)
+        {
+            Console.WriteLine("Move to which row");
+            int newRow = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Move to which column");
+            int newCol = Convert.ToInt32(Console.ReadLine());
+            if (this.Grid[newRow][newCol]== " ")
+            {
+                if (checker.Color == "white")
+                {
+                    if (newRow < checker.Position[0])
+                    {
+                        if (newRow + newCol == checker.Position[0] + checker.Position[1] || newRow - newCol == checker.Position[0] - checker.Position[1])
+                        {
+                            checker.Position = new int[]{newRow, newCol};
+                            return true;
+                        }
+                        
+                    }
+                }
+                if (checker.Color == "black")
+                {
+                    if (newRow > checker.Position[0])
+                    {
+                        if (newRow + newCol == checker.Position[0] + checker.Position[1] || newRow - newCol == checker.Position[0] - checker.Position[1])
+                        {
+                            checker.Position = new int[]{newRow, newCol};
+                            return true;
+                        }
+                        
+                    }
+                }
+
+                
+            }
+            System.Console.WriteLine("Illegal Move:");
+            return false;
+            
         }
         
-        public void RemoveChecker(int row, int column)
+        public void EliminateChecker(bool isValid, Checker checker)
         {
-            // Your code here
+            if (isValid)
+            {
+                if (checker.Color == "white")
+                {
+                    if (Grid[checker.Position[0]+1][checker.Position[1]-1] == "black")
+                    {
+                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]-1}));
+                        RemoveChecker(eliminatedChecker);
+
+                    }
+                }
+                if (checker.Color == "black")
+                {
+                    if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "white")
+                    {
+                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
+                        RemoveChecker(eliminatedChecker);
+
+                    }
+                }
+                if(checker.Color == "white")
+                {
+                    if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "black")
+                    {
+                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
+                        RemoveChecker(eliminatedChecker);
+
+                    }
+                }
+            }
+
+        }
+
+        public void RemoveChecker(Checker checker)
+        {
+            this.Checkers.Remove(checker);
             return;
         }
         
@@ -80,7 +221,7 @@ namespace Checkers
     {
         public Game()
         {
-            // Your code here
+                   
         }
     }
 }
