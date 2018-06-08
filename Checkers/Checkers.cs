@@ -11,6 +11,11 @@ namespace Checkers
             Board board = new Board();
             board.GenerateCheckers();
             board.DrawBoard();
+            board.SelectChecker();
+            board.MoveChecker();;
+            Console.WriteLine();
+
+            
             
             new Game();            
         }
