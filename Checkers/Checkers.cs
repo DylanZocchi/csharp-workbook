@@ -180,7 +180,7 @@ namespace Checkers
         
         public void DeleteChecker(int newRow, int oldRow, int newCol, int oldCol)
         {
-            if (newRow - oldRow > 1)
+            if (newRow - oldRow > 1 || newRow + oldRow > 1)
             {
                 int row = (oldRow + newRow) / 2;
                 int col = (oldCol + newCol) / 2;
@@ -188,70 +188,70 @@ namespace Checkers
             }
             
         }
-        public void EliminateChecker1(Checker checker)
-        {
-            if (checker.Color == "white")
-                {
-                    if (Grid[checker.Position[0]+1][checker.Position[1]-1] == "black")
-                    {
-                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]-1}));
-                        RemoveChecker(eliminatedChecker);
+        // public void EliminateChecker1(Checker checker)
+        // {
+        //     if (checker.Color == "white")
+        //         {
+        //             if (Grid[checker.Position[0]+1][checker.Position[1]-1] == "black")
+        //             {
+        //                 Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]-1}));
+        //                 RemoveChecker(eliminatedChecker);
 
-                    }
-                }
-                if (checker.Color == "black")
-                {
-                    if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "white")
-                    {
-                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
-                        RemoveChecker(eliminatedChecker);
+        //             }
+        //         }
+        //         if (checker.Color == "black")
+        //         {
+        //             if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "white")
+        //             {
+        //                 Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
+        //                 RemoveChecker(eliminatedChecker);
 
-                    }
-                }
-                if(checker.Color == "white")
-                {
-                    if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "black")
-                    {
-                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
-                        RemoveChecker(eliminatedChecker);
+        //             }
+        //         }
+        //         if(checker.Color == "white")
+        //         {
+        //             if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "black")
+        //             {
+        //                 Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
+        //                 RemoveChecker(eliminatedChecker);
 
-                    }
-                }
-        }
-        public void EliminateChecker(bool isValid, Checker checker)
-        {
-            if (isValid)
-            {
-                if (checker.Color == "white")
-                {
-                    if (Grid[checker.Position[0]+1][checker.Position[1]-1] == "black")
-                    {
-                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]-1}));
-                        RemoveChecker(eliminatedChecker);
+        //             }
+        //         }
+        // }
+        // public void EliminateChecker(bool isValid, Checker checker)
+        // {
+        //     if (isValid)
+        //     {
+        //         if (checker.Color == "white")
+        //         {
+        //             if (Grid[checker.Position[0]+1][checker.Position[1]-1] == "black")
+        //             {
+        //                 Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]-1}));
+        //                 RemoveChecker(eliminatedChecker);
 
-                    }
-                }
-                if (checker.Color == "black")
-                {
-                    if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "white")
-                    {
-                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
-                        RemoveChecker(eliminatedChecker);
+        //             }
+        //         }
+        //         if (checker.Color == "black")
+        //         {
+        //             if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "white")
+        //             {
+        //                 Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
+        //                 RemoveChecker(eliminatedChecker);
 
-                    }
-                }
-                if(checker.Color == "white")
-                {
-                    if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "black")
-                    {
-                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
-                        RemoveChecker(eliminatedChecker);
+        //             }
+        //         }
+        //         if(checker.Color == "white")
+        //         {
+        //             if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "black")
+        //             {
+        //                 Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
+        //                 RemoveChecker(eliminatedChecker);
 
-                    }
-                }
-            }
+        //             }
+        //         }
+        //     }
 
-        }
+        // }
 
         public void RemoveChecker(Checker checker)
         {
