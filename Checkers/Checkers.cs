@@ -7,17 +7,8 @@ namespace Checkers
     class Program
     {
         static void Main(string[] args)
-        {
-            Board board = new Board();
-            board.GenerateCheckers();
-            board.DrawBoard();
-            board.SelectChecker();
-            board.MoveChecker();;
-            Console.WriteLine();
-
-            
-            
-            new Game();            
+        {     
+            Game.Start();              
         }
     }
 
@@ -30,7 +21,7 @@ namespace Checkers
         public Checker(string color, int[] position)
         {
             int circleId;
-            if (color == "white")
+            if (color == "black")
             {
                 circleId = int.Parse("25CB", System.Globalization.NumberStyles.HexNumber);
             }
@@ -40,6 +31,7 @@ namespace Checkers
             }
             this.Symbol = char.ConvertFromUtf32(circleId);
             this.Position = position;
+            this.Color = color;
         }
     }
 
@@ -113,8 +105,8 @@ namespace Checkers
         
         public void DrawBoard()
         {
-            CreateBoard();
-            PlaceCheckers();
+            
+            
             Console.WriteLine("  0 1 2 3 4 5 6 7");
             for (int i = 0; i < 8; i++)
             {
@@ -135,8 +127,18 @@ namespace Checkers
             return Checkers.Find(x => x.Position.SequenceEqual(new List<int> { row, col }));
         }
 
+        public void MoveChecker2(Checker checker)
+        {
+            Console.WriteLine("Move to which row");
+            int newRow = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Move to which column");
+            int newCol = Convert.ToInt32(Console.ReadLine());
+            checker.Position = new int[]{newRow, newCol};
+            
+        }
         public bool MoveChecker(Checker checker)
         {
+
             Console.WriteLine("Move to which row");
             int newRow = Convert.ToInt32(Console.ReadLine());
             Console.WriteLine("Move to which column");
@@ -170,11 +172,52 @@ namespace Checkers
 
                 
             }
+            
             System.Console.WriteLine("Illegal Move:");
             return false;
             
         }
         
+        public void DeleteChecker(int newRow, int oldRow, int newCol, int oldCol)
+        {
+            if (newRow - oldRow > 1)
+            {
+                int row = (oldRow + newRow) / 2;
+                int col = (oldCol + newCol) / 2;
+                RemoveChecker(Checkers.Find(x => x.Position.SequenceEqual(new List<int> { row, col })));
+            }
+            
+        }
+        public void EliminateChecker1(Checker checker)
+        {
+            if (checker.Color == "white")
+                {
+                    if (Grid[checker.Position[0]+1][checker.Position[1]-1] == "black")
+                    {
+                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]-1}));
+                        RemoveChecker(eliminatedChecker);
+
+                    }
+                }
+                if (checker.Color == "black")
+                {
+                    if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "white")
+                    {
+                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
+                        RemoveChecker(eliminatedChecker);
+
+                    }
+                }
+                if(checker.Color == "white")
+                {
+                    if (Grid[checker.Position[0]+1][checker.Position[1]+1] == "black")
+                    {
+                        Checker eliminatedChecker = Checkers.Find(x => x.Position.SequenceEqual(new List<int> { checker.Position[0]+1, checker.Position[1]+1}));
+                        RemoveChecker(eliminatedChecker);
+
+                    }
+                }
+        }
         public void EliminateChecker(bool isValid, Checker checker)
         {
             if (isValid)
@@ -212,6 +255,10 @@ namespace Checkers
 
         public void RemoveChecker(Checker checker)
         {
+            if (checker == null)
+            {
+                return;
+            }
             this.Checkers.Remove(checker);
             return;
         }
@@ -224,9 +271,31 @@ namespace Checkers
 
     class Game
     {
-        public Game()
+        public static void Start()
         {
-                   
+            Board board = new Board();
+            board.GenerateCheckers();
+            
+            board.PlaceCheckers();
+            board.DrawBoard();
+            while (!board.CheckForWin())
+            {
+                Checker temp = board.SelectChecker();
+                int oldRow = temp.Position[0];
+                int oldCol = temp.Position[1];
+                board.MoveChecker2(temp);
+                int newRow = temp.Position[0];
+                int newCol = temp.Position[1];
+                board.DeleteChecker(newRow, oldRow, newCol, oldCol);
+                board.CreateBoard();
+                board.PlaceCheckers();
+                board.DrawBoard();
+                if (board.CheckForWin())
+                {
+                    System.Console.WriteLine("Game Over!");
+                    return;
+                }
+            }       
         }
     }
 }
