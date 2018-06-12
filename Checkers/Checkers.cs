@@ -180,7 +180,7 @@ namespace Checkers
         
         public void DeleteChecker(int newRow, int oldRow, int newCol, int oldCol)
         {
-            if (newRow - oldRow > 1 || newRow + oldRow > 1)
+            if ((Math.Abs(newRow - oldRow) > 1 && (Math.Abs(oldCol - newCol) > 1 )))
             {
                 int row = (oldRow + newRow) / 2;
                 int col = (oldCol + newCol) / 2;
